@@ -63,7 +63,7 @@ def precipitation():
     session = Session(engine)
     
     # Calculate the date one year from the most recent data point in the database.
-    prev_year = dt.date(2017, 8, 23) - dt.timedelta(days=365)
+    prior_year = dt.date(2017, 8, 23) - dt.timedelta(days=365)
 
     # Perform a query to retrieve the data and precipitation
     results = session.query(Measurement.date, Measurement.prcp).filter(Measurement.date >= prior_year).all()
@@ -180,8 +180,8 @@ def start_date(start):
     # Return JSON
     return jsonify(start_date_values)
 
-@app.route("/api/v1.0/<start>/<end>")
-def start_end_date(start,end):
+@app.route("/api/v1.0/temp/<start>/<end>")
+def start_end_date(start, end):
     """Return a JSON list of the minimum temperature, the average temperature, and the 
     maximum temperature for a specified start-end range. For a specified start date 
     and end date, calculate TMIN, TAVG, and TMAX for the dates from the start date 
